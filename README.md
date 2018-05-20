@@ -65,5 +65,6 @@ Then the script will ask you if you want to launch the Battleship main program o
 1) Main program Battleship : java sanchez/alexis/Battleship
 2) TestIA : java fr/battleship/TestIA
 
+Once you have launched the AI test you will find in the build folder a csv file where the results can be found.
 
 # FINISH ! 
