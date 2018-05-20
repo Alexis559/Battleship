@@ -11,17 +11,17 @@ import sanchez.alexis.player.ia.AILevel1;
 import sanchez.alexis.player.ia.AILevel2;
 
 /**
- * [MAIN] Game two players - everything starts here
+ * [MAIN] Battleship - everything starts here
  * 
  * @author Alexis Sanchez
  *
  */
 public class Battleship {
-
+	
 	public static void main(String[] args) {
 
 		Player player1 = null;
-		Player player2 = null;		
+		Player player2 = null;
 		Player current = null;
 		Player enemy = null;
 
@@ -32,14 +32,16 @@ public class Battleship {
 		boolean goOn = true;
 		int nbGame = 0;
 		Scanner sc = new Scanner(System.in);
-		
+
 		String missileCoord = null;
 
-		int[] ship_size = {5, 4, 3, 3, 2};// list of ships size
-		
+		int[] ship_size = { 5, 4, 3, 3, 2 };// list of ships size
+
 		System.out.println("============ Battleship ============\n");
-		
-		while(!choice){
+
+		// Choose the game mode and the level of AI
+
+		while (!choice) {
 			System.out.println("Hello, which game mode do you want ?\n");
 			System.out.println("1 - Player vs Player");
 			System.out.println("2 - Player vs AI");
@@ -55,13 +57,13 @@ public class Battleship {
 				player1 = new Player(name1);
 				player2 = new Player(name2);
 				choice = true;
-				break;			
+				break;
 			case "2":
 				System.out.println("You chose the Player vs AI mode\n");
 				System.out.println("Name of the player 1: ");
 				String name3 = sc.nextLine();
 				player1 = new Player(name3);
-				while(!choice){
+				while (!choice) {
 					System.out.println("Which level of AI do you want to play aginst ?\n");
 					System.out.println("1 - Beginner");
 					System.out.println("2 - Medium");
@@ -88,12 +90,16 @@ public class Battleship {
 						break;
 					}
 				}
-				break;			
+				break;
 			case "3":
 				System.out.println("You chose the AI vs AI mode\n");
-				while(!choice){
-					for(int j=0; j<2; j++){
-						System.out.println("Which level of AI for the first one ?\n");
+				while (!choice) {
+					for (int j = 0; j < 2; j++) {
+						if (!choice)
+							j = 0;
+						else
+							choice = false;
+						System.out.println("Which level of AI ?\n");
 						System.out.println("1 - Beginner");
 						System.out.println("2 - Medium");
 						System.out.println("3 - Hard");
@@ -101,7 +107,7 @@ public class Battleship {
 						switch (ai) {
 						case "1":
 							System.out.println("\n You chose the beginner AI");
-							if(j%2 == 0)
+							if (j % 2 == 0)
 								player1 = new AILevel0("Bob");
 							else
 								player2 = new AILevel0("Lapin");
@@ -109,7 +115,7 @@ public class Battleship {
 							break;
 						case "2":
 							System.out.println("\n You chose the medium AI");
-							if(j%2 == 0)
+							if (j % 2 == 0)
 								player1 = new AILevel1("Bob");
 							else
 								player2 = new AILevel1("Lapin");
@@ -117,7 +123,7 @@ public class Battleship {
 							break;
 						case "3":
 							System.out.println("\n You chose the hard AI");
-							if(j%2 == 0)
+							if (j % 2 == 0)
 								player1 = new AILevel2("Bob");
 							else
 								player2 = new AILevel2("Lapin");
@@ -135,22 +141,24 @@ public class Battleship {
 				break;
 			}
 		}
-		
-		while(goOn){
+		// END OF CHOICE
+
+		// START OF THE GAME LOOP
+		while (goOn) {
 			finish = false;
 			preparation = false;
 			goOn = true;
+
 			current = player1;
 			enemy = player2;
 
-			//setting up the game
+			// SETTING UP THE GAME (place ship)
 			while (!preparation) {
 				System.out.println("[Preparation] It's the turn of " + current.getPlayerName());
 				for (int i = 0; i < ship_size.length; i++) {
-					if(current.isAI())
-					{
+					if (current.isAI()) {
 						((AI) current).placeShip(ship_size[i]);
-					}else{
+					} else {
 						String cStart;
 						String cStop;
 						boolean shipAdded = false;
@@ -196,7 +204,8 @@ public class Battleship {
 				}
 				current = player2;
 			}
-			
+			// END OF PREPARATION
+
 			System.out.println("\n===================================");
 			System.out.println("Preparation is done !");
 			System.out.println("===================================");
@@ -209,16 +218,15 @@ public class Battleship {
 			System.out.println(player2.displayGrid());
 			System.out.println("\n");
 
-
-			if(nbGame%2 == 0){
+			if (nbGame % 2 == 0) {
 				current = player1;
 				enemy = player2;
-			}else{
+			} else {
 				current = player2;
 				enemy = player1;
 			}
-			
-			//Start of the game
+
+			// Start of the game
 			while (!finish) {
 				System.out.println("===================================");
 				System.out.println(current.getPlayerName() + "'s turn !");
@@ -230,8 +238,9 @@ public class Battleship {
 				System.out.println("\n" + current.getPlayerName() + "'s missile grid" + "\n");
 				System.out.println(current.displayMissileGrid());
 				System.out.println("\n");
-				
-				if(!current.isAI()){
+
+				//Attack
+				if (!current.isAI()) {
 					System.out.println(current.getPlayerName() + " where do you want to attack ?");
 					missileCoord = sc.nextLine();
 					while (!CoordinatesCheck.isValidCoord(missileCoord) || current.isCoordIn(missileCoord)) {
@@ -247,34 +256,35 @@ public class Battleship {
 					} else {
 						hit = player2.attack(player1, missileCoord);
 					}
-				}else{
-					hit = ((AI)current).attack(enemy);
+				} else {
+					hit = ((AI) current).attack(enemy);
 				}
-				
 
 				if (hit) {
 					System.out.println(current.getPlayerName() + " your missile hit a ship !");
-					if(!current.isAI()){
+					if (!current.isAI()) {
 						if (enemy.shipDestroyed(missileCoord)) {
 							System.out.println(current.getPlayerName() + " you have destroyed a ship !");
 						}
 					}
+					//If one player lost
 					if (enemy.lost()) {
 						System.out.println("\n\n===================================");
 						System.out.println(current.getPlayerName() + " has win !!");
 						System.out.println("===================================");
 						System.out.println("Do you want to continue to play ? y/n");
 						String cont = sc.nextLine();
-						if(cont.equals("n")){
+						//He don't want to continue
+						if (cont.equals("n")) {
 							goOn = false;
-						}else{
+						} else {//He want to continue so we reset the players
 							nbGame++;
-							if(player1.isAI())
-								((AI)player1).resetPlayer();
+							if (player1.isAI())
+								((AI) player1).resetPlayer();
 							else
 								player1.resetPlayer();
-							if(player2.isAI())
-								((AI)player2).resetPlayer();
+							if (player2.isAI())
+								((AI) player2).resetPlayer();
 							else
 								player2.resetPlayer();
 						}
@@ -283,6 +293,8 @@ public class Battleship {
 				} else {
 					System.out.println(current.getPlayerName() + " your missile missed");
 				}
+				
+				//We switch of players
 				if (current.equals(player1)) {
 					current = player2;
 					enemy = player1;
@@ -290,7 +302,7 @@ public class Battleship {
 					current = player1;
 					enemy = player2;
 				}
-			}			
+			}
 		}
 		sc.close();
 		System.out.println("\nGoodbye !");

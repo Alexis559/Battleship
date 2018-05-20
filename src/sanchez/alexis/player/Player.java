@@ -11,7 +11,7 @@ import sanchez.alexis.coordinate.CoordinatesCheck;
  * 
  * @author Alexis Sanchez
  */
-public class Player{
+public class Player implements IPlayer{
 	private ArrayList<Ship> ships; // list of ships
 	private ArrayList<Coordinate> missileCoord;// list of missiles coordinates
 	private ArrayList<Coordinate> enemyMissile;
@@ -299,7 +299,7 @@ public class Player{
 					if (isHit) {
 						grid += "  x";// the missile hit the ship
 					} else {
-						grid +="  o";// missile in the sea
+						grid +="  *";// missile in the sea
 					}
 				} else {
 					grid += "  .";// water or maybe air don't know :)

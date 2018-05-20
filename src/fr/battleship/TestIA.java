@@ -1,4 +1,4 @@
-package sanchez.alexis;
+package fr.battleship;
 
 import java.io.File;
 import java.io.FileNotFoundException;
