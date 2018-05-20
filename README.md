@@ -28,7 +28,7 @@ Main package : src/sanchez/alexis
 		 * AILevel2.java
 
 
-## Compilation & Execute
+## Compilation & Execution
 At the root of the project you can find two files:
 
 * [WINDOWS]_Compilation_java.bat
