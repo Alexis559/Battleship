@@ -8,7 +8,7 @@ import sanchez.alexis.player.Player;
  *
  */
 
-public interface AIInterface {
+public abstract interface AIInterface {
 	/**
 	 * To place ship randomly
 	 * @param size size of the ship

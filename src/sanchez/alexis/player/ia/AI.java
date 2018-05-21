@@ -17,7 +17,10 @@ public abstract class AI extends Player implements AIInterface{
 		super(playerName);
 	}
 
-	
+	/**
+	 * To know if the player is an AI
+	 * @return true if yes else false
+	 */	
 	@Override
 	public boolean isAI(){
 		return true;

@@ -31,7 +31,7 @@ public class AILevel2 extends AI{
 					this.coordToHit.push(new Coordinate((char)j + String.valueOf(i)));
 					j--;//we only add one coordinate on two
 				}
-				//we advance of one column on the line of even numbers
+				//we advance of one column on the line of odd numbers
 				if((i%2) == 0) {
 					x = 0;
 				}else {
@@ -78,14 +78,13 @@ public class AILevel2 extends AI{
 		boolean hit = false;
 		//if we have already hit the coordinate we take another one in the stack
 		do{
-			//try{
+			try{
 				currentCoord = this.coordToHit.pop(); 
-			//}catch(Exception e){
-			//	e.printStackTrace();
-			//}
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
 		}while(this.isCoordIn(currentCoord.toString()));
 		hit = super.attack(p, this.currentCoord.toString());
-		//this.coordToHit.remove(0);
 		//if the coordinate comes at the end of the line we need to change of line and come back at the 1st column
 		if(hit){
 			//right

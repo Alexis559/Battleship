@@ -270,7 +270,7 @@ public class Player implements IPlayer{
 	}
 
 	/**
-	 * To display the grid of the missiles shot by the player with beautiful details
+	 * To display the grid of the missiles shot by the player with beautiful details and great design
 	 */
 	public String displayMissileGrid() {
 		String grid = "  ";

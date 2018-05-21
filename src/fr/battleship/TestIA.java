@@ -85,7 +85,7 @@ public class TestIA {
 						hit = players[loopGame].attack(players[loopGame-1]);
 					}
 					
-					//check for the end of game
+					//check for the end of the game
 					if (hit) {
 						if (enemy.lost()) {
 							current.setScore(current.getScore()+1);
