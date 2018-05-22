@@ -31,18 +31,18 @@ Main package : src/sanchez/alexis
 ## Compilation & Execution
 At the root of the project you can find two files:
 
-* [WINDOWS]_Compilation_java.bat
-*  [LINUX]_Compilation_java.sh
+* WINDOWS_Compilation_java.bat
+*  LINUX_Compilation_java.sh
 
 #### Keep sure to let the scripts at the root of the project !
 
 #### You also need to verify that Java is installed and configured (PATH variable etc...)
 
-##### Windows : Use the script named "[WINDOWS]_Compilation_java.bat"
+##### Windows : Use the script named "WINDOWS_Compilation_java.bat"
 First to launch the script :
 
 1) Use a Terminal and move to the project with the "cd" command
-2) Then launch it with the name of the script :  [WINDOWS]_Compilation_java.bat
+2) Then launch it with the name of the script :  WINDOWS_Compilation_java.bat
 
 #### or
 
@@ -51,7 +51,8 @@ First to launch the script :
 ##### Linux :
 
 1) Open a terminal and move to the project with the "cd" command
-2) Launch the script with : ./[LINUX]_Compilation_Java.sh
+2) Use command chmod to get the right of execution : chmod 744 LINUX_Compilation_Java.sh
+3) Launch the script with : ./LINUX_Compilation_Java.sh
 
 Then :
 
