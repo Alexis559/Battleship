@@ -218,6 +218,7 @@ public class Battleship {
 			System.out.println(player2.displayGrid());
 			System.out.println("\n");
 
+			//we switch of player who begin each game
 			if (nbGame % 2 == 0) {
 				current = player1;
 				enemy = player2;
